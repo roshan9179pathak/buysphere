@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Buysphere
+
+Buysphere is a fully-fledged e-commerce application that allows users to shop a wide range of products. It is built with modern web technologies, providing a seamless shopping experience.
+
+## Features
+
+- Browse a wide range of products
+- Add items to the cart and proceed to checkout
+- User-friendly design with responsive layout
+- State management using Redux Toolkit
+
+## Tech Stack
+
+The project uses the following technologies:
+
+- **Next.js**: Framework for building server-rendered React applications
+- **React**: JavaScript library for building user interfaces
+- **TypeScript**: Type checking for JavaScript
+- **JavaScript**: Core programming language for functionality
+- **Redux Toolkit**: State management tool
+- **React-Redux**: Integration of React with Redux
+- **TailwindCSS**: Utility-first CSS framework for styling
+- **DaisyUI**: TailwindCSS component library
+- **React Icons**: Collection of popular icon libraries
+- **DOM**: Manipulation of the Document Object Model
 
 ## Getting Started
 
-First, run the development server:
+To get a local copy of the project up and running, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/yourusername/buysphere.git
+    ```
+2. **Navigate to the project directory**:
+    ```bash
+    cd buysphere
+    ```
+3. **Install dependencies**:
+    ```bash
+    npm install
+    ```
+4. **Run the development server**:
+    ```bash
+    npm run dev
+    ```
+    Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## License
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the ... License.
