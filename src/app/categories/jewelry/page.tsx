@@ -1,16 +1,21 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
+import { addProduct } from "../../../store/slices/productsSlice";
 
 interface Product {
   id: number;
-  name: string;
+  title: string;
+  price: number;
   image: string;
   description: string;
-  price: number;
   category: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
 }
 
 const Page: React.FC = () => {
@@ -22,17 +27,19 @@ const Page: React.FC = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      setLoading(true); // Start loading state
+      setLoading(true);
       try {
-        const response = await fetch("https://fakestoreapi.com/products/category/jewelery");
+        const response = await fetch(
+          "https://fakestoreapi.com/products/category/jewelery"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch products");
         }
 
         const data: Product[] = await response.json();
         setProducts(data);
-        // Dispatch products to Redux store if needed
-        // dispatch(yourAction(data));
+
+        data.map((product) => dispatch(addProduct(product)));
       } catch (error: unknown) {
         if (error instanceof Error) {
           setError(error.message);
@@ -40,7 +47,7 @@ const Page: React.FC = () => {
           setError("Failed to fetch products");
         }
       } finally {
-        setLoading(false); // End loading state
+        setLoading(false); 
       }
     };
 
@@ -61,7 +68,7 @@ const Page: React.FC = () => {
         {products.map((product) => (
           <li key={product.id}>
             <Link href={`/categories/jewelry/${product.id}`}>
-              <ProductCard onClick={()=>console.log()} product={product} />
+              <ProductCard onClick={() => console.log()} product={product} />
             </Link>
           </li>
         ))}

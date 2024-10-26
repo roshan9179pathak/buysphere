@@ -48,13 +48,13 @@ const SignUp = () => {
             <span className="label-text">Password</span>
           </label>
          
-          {/* <InputField type='email' placeholder='Enter your Email' className='input input-bordered w-full' required = {true} {...register('email')} autoComplete='email' id="emal" /> */}
+          <InputField type='text' placeholder='Enter your Name' className='input input-bordered w-full' required = {true} register={register} autoComplete='name' id="name" />
         </div>
         <div className="form-control mb-4">
           <label className="label">
             <span className="label-text">Confirm Password</span>
           </label>
-          {/* <InputField type='password' placeholder='Enter your password' className='input input-bordered w-full' required = {true} {...register('passwod')} autoComplete='password' id='password' /> */}
+          <InputField type='text' placeholder='Enter your Name' className='input input-bordered w-full' required = {true} register={register} autoComplete='name' id="name" />
         </div>
         <Button
           type = 'button'

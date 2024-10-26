@@ -3,6 +3,8 @@ import React from "react";
 import Button from "./Buttons";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import {clearState} from '../store/slices/productsSlice'
+import { useDispatch, UseDispatch } from "react-redux";
 
 type CardProps = {
   id: string;
@@ -12,16 +14,23 @@ type CardProps = {
 };
 
 const Card = ({ id, src, name, description }: CardProps) => {
+
+  const dispatch = useDispatch();
   const router = useRouter();
+
+  const clearGstate = ()=>{
+    dispatch(clearState());
+  }
 
   const handleClick = () => {
     router.push(`/categories/${id}`);
   };
 
+  
+
   return (
     <div className="card bg-base-100 w-full sm:w-80 md:w-96 lg:w-[350px] shadow-xl transition-transform duration-700 ease-in-out transform hover:scale-105 md:hover:scale-110 lg:hover:scale-125">
       <figure className="px-5 pt-5 md:px-10 md:pt-10">
-        {/* <img src={src} alt="Shoes" className="rounded-xl" /> */}
 
         <Image
           src={src} 

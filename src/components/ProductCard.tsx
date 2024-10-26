@@ -4,11 +4,15 @@ import styles from './styles/ProductCard.module.css';
 
 interface Product {
   id: number;
-  name: string;
-  image: string;
-  description: string;
+  title: string;
   price: number;
+  image: string;
+  description:string;
   category: string;
+  rating: {
+    rate: number,
+    count: number
+  }
 }
 
 interface ProductCardProps {
@@ -37,13 +41,13 @@ const ProductCard: React.FC<ProductCardProps> = React.memo(({ product, onClick }
       </figure>
       <div className="card-body">
         <h2 className="card-title">
-          {product.name}
+          {product.title.substring(0 , 20)}
           <div className="badge badge-secondary">NEW</div>
         </h2>
-        <p>{product.description.substring(0, 81)}{product.description.length > 81 && '...'}</p> {/* Add ellipsis for long descriptions */}
+        <p>{product.description.substring(0, 61)}</p> 
         <div className="card-actions justify-end">
           <div className="badge badge-outline">{product.category}</div>
-          <div className="badge badge-outline">${product.price.toFixed(2)}</div> {/* Format price */}
+          <div className="badge badge-outline">${product.price.toFixed(2)}</div> 
         </div>
       </div>
     </div>
