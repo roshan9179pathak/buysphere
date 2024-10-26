@@ -4,10 +4,16 @@ Buysphere is a fully-fledged e-commerce application that allows users to shop a 
 
 ## Features
 
-- Browse a wide range of products
-- Add items to the cart and proceed to checkout
-- User-friendly design with responsive layout
-- State management using Redux Toolkit
+## Features
+
+- **Server-Side Rendering (SSR):** Enhances performance and SEO by rendering pages on the server.
+- **Type Checking:** Utilizes TypeScript for static type checking, reducing runtime errors and improving code quality.
+- **User Authentication and Profile Management:** Secure login and profile management for users.
+- **Product Browsing:** Browse products with categories, filters, and search functionality.
+- **Shopping Cart Functionality:** Add, remove, and update items in the shopping cart.
+- **Responsive Design:** Optimized for both mobile and desktop devices.
+- **Admin Dashboard:** (If applicable) Manage products and view sales analytics.
+- **Lazy Loading:** Loads images and components only when they are needed, improving load times and overall performance.
 
 ## Tech Stack
 
