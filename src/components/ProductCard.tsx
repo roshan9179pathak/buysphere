@@ -54,4 +54,5 @@ const ProductCard: React.FC<ProductCardProps> = React.memo(({ product, onClick }
   );
 });
 
+ProductCard.displayName = "ProductCard";
 export default ProductCard;

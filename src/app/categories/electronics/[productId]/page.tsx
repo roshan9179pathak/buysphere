@@ -38,7 +38,7 @@ const Page = () => {
   useEffect(() => {
     setLoading(true)
     const updateCall = async () => {
-      return new Promise(async (resolve, reject) => {
+      return new Promise(async (resolve) => {
         const fetchProducts = async () => {
           setLoading(true);
           try {
@@ -91,6 +91,10 @@ const Page = () => {
     return <div className="flex justify-center items-center h-screen">
     <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"></div>
   </div>
+  }
+
+  if(error){
+    return <p>{`Error Occured`}</p>
   }
 
   return (
