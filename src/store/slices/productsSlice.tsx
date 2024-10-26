@@ -13,18 +13,15 @@ interface Product {
   }
 }
 
-interface Type {
-  id:number
-}
 
 interface ProductState {
   products: Product[];
-  // selectedProduct: Product | null
+  
 }
 
 const initialState: ProductState = {
   products: [],
-  // selectedProduct:null
+ 
 };
 
 const productSlice = createSlice({
@@ -36,10 +33,7 @@ const productSlice = createSlice({
       state.products.push(action.payload);
     },
     
-    // getProduct: (state , action: any) =>{
-    //   const index = state.products.findIndex(product => product.id === action.payload.id);
-    //   state.selectedProduct = state.products[index]
-    // },
+  
 
     updateProduct: (state, action: PayloadAction<Product>) => {
       const index = state.products.findIndex(product => product.id === action.payload.id);

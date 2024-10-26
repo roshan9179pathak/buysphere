@@ -17,7 +17,7 @@ interface Product {
   };
 }
 
-const page = () => {
+const Page = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -37,7 +37,7 @@ const page = () => {
 
   useEffect(() => {
     const updateCall = async () => {
-      return new Promise(async (resolve, reject) => {
+      return new Promise(async (resolve) => {
         const fetchProducts = async () => {
           setLoading(true);
           try {
@@ -83,6 +83,16 @@ const page = () => {
 
   }, []);
 
+  if(error){
+    return <p>{`Error occured`}</p>
+  }
+
+  if (loading) {
+    return <div className="flex justify-center items-center h-screen">
+    <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"></div>
+  </div>
+  }
+
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl">
       <figure>
@@ -118,4 +128,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

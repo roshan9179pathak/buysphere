@@ -1,42 +1,4 @@
 'use client'
-// import React from "react";
-// 
-
-// interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement>  {
-//   type: string;
-//   placeholder?: string;
-//   className?: string;
-//   required?: boolean;
-//   autoComplete?: string;
-//   customProp?: string;
-//   id:string
-//   register: UseFormRegister<any>
-// };
-
-// const InputField = ({
-//   type = 'text',
-//   placeholder,
-//   className,
-//   required= false,
-//   autoComplete,
-//   id,
-//   ...rest
-
-// }: InputFieldProps) => {
-//   return (
-//     <input
-//     required={required}
-//       type={type}
-//       placeholder={placeholder}
-//       className={`${className}`}
-//       autoComplete= {autoComplete}
-//       {...register(id, { required: required ? 'This field is required' : false })}
-//       {...rest}
-//     />
-//   );
-// };
-
-// export default InputField;
 
 import React from 'react';
 import { UseFormRegister } from 'react-hook-form';

@@ -46,7 +46,7 @@ const Card = ({ id, src, name, description }: CardProps) => {
           {description}
         </p>
         <div className="card-actions">
-          <Button onClick={handleClick} className="btn btn-primary">
+          <Button onClick={()=>{clearGstate(); handleClick()}} className="btn btn-primary">
             Explore
           </Button>
         </div>

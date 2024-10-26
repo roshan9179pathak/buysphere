@@ -17,7 +17,7 @@ interface Product {
   };
 }
 
-const page = () => {
+const Page = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -36,6 +36,7 @@ const page = () => {
   products = products.products;
 
   useEffect(() => {
+    setLoading(true)
     const updateCall = async () => {
       return new Promise(async (resolve, reject) => {
         const fetchProducts = async () => {
@@ -81,7 +82,16 @@ const page = () => {
 
     updateSelectedProduct();
 
+    setLoading(false)
+
   }, []);
+
+
+  if (loading) {
+    return <div className="flex justify-center items-center h-screen">
+    <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"></div>
+  </div>
+  }
 
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl">
@@ -118,4 +128,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

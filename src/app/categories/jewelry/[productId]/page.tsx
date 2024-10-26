@@ -1,8 +1,7 @@
 "use client";
-import React, { useState, useLayoutEffect, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "next/navigation";
-import getProduct from "../../../../store/slices/productsSlice";
 import Button from "@/components/Buttons";
 
 interface Product {
@@ -18,7 +17,7 @@ interface Product {
   };
 }
 
-const page = () => {
+const Page = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -38,7 +37,7 @@ const page = () => {
 
   useEffect(() => {
     const updateCall = async () => {
-      return new Promise(async (resolve, reject) => {
+      return new Promise(async (resolve) => {
         const fetchProducts = async () => {
           setLoading(true);
           try {
@@ -82,7 +81,20 @@ const page = () => {
 
     updateSelectedProduct();
 
+    setLoading(false)
+
   }, []);
+
+  if (loading) {
+    return <div className="flex justify-center items-center h-screen">
+    <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"></div>
+  </div>
+  }
+
+  if(error){
+    return <p>{error}</p>
+  }
+  
 
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl">
@@ -119,4 +131,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
