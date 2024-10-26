@@ -98,9 +98,9 @@ const Page = () => {
 
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl">
-      <figure>
-        <img src={selectedProduct?.image} alt="Album" />
-      </figure>
+      <figure className="w-4/5 max-h-96">
+        <img src={selectedProduct?.image} alt="Album" className="w-full h-full rounded-md object-contain" />
+      </figure >
       <div className="card-body">
         <h2 className="card-title">{selectedProduct?.title}</h2>
         <p>{selectedProduct?.description}</p>
