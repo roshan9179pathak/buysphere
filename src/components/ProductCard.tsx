@@ -35,7 +35,7 @@ const ProductCard: React.FC<ProductCardProps> = React.memo(({ product, onClick }
         <img
           className="w-full h-48 object-cover object-fill"
           src={product.image}
-          alt={`Image of ${product.name}`} 
+          alt={`Image of ${product.title}`} 
           loading="lazy" 
         />
       </figure>

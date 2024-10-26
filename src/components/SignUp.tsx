@@ -4,6 +4,7 @@ import Button from './Buttons';
 import InputField from './InputField'
 import { useForm } from 'react-hook-form';
 import Link from 'next/link'
+import { useRouter } from 'next/navigation';
 
 interface FormData{
   email: string;
@@ -13,7 +14,9 @@ interface FormData{
 
 const SignUp = () => {
 
-  const { register , getValues , formState:{errors}} = useForm<FormData>();
+    const router = useRouter();
+
+  const { register , getValues } = useForm<FormData>();
 
   const handleSignUp = ()=>{
     const newUser = getValues();
@@ -27,7 +30,8 @@ const SignUp = () => {
         localStorage.setItem('users', JSON.stringify([newUser]))
       }
 
-      alert(`Signed in successfully`)
+        router.push('/')
+      
   }
 
   return (
@@ -41,20 +45,49 @@ const SignUp = () => {
             <span className="label-text">Name</span>
           </label>
   
-          <InputField type='text' placeholder='Enter your Name' className='input input-bordered w-full' required = {true} register={register} autoComplete='name' id="name" />
+          {/* <InputField type='text' placeholder='Enter your Name' className='input input-bordered w-full' required = {true} register={register} autoComplete='name' id="name" /> */}
+
+          <InputField
+                type="text"
+                placeholder="Enter your Name"
+                className="input input-bordered w-full"
+                required={true}
+                autoComplete="name"
+                id="name"
+                register={register}
+              />
         </div>
         <div className="form-control mb-4">
           <label className="label">
-            <span className="label-text">Password</span>
+            <span className="label-text">Email</span>
           </label>
          
-          <InputField type='text' placeholder='Enter your Name' className='input input-bordered w-full' required = {true} register={register} autoComplete='name' id="name" />
+         
+
+          <InputField
+                type="email"
+                placeholder="Enter your Email"
+                className="input input-bordered w-full"
+                required={true}
+                autoComplete="email"
+                id="email"
+                register={register}
+              />
+
         </div>
         <div className="form-control mb-4">
           <label className="label">
-            <span className="label-text">Confirm Password</span>
+            <span className="label-text"> Password</span>
           </label>
-          <InputField type='text' placeholder='Enter your Name' className='input input-bordered w-full' required = {true} register={register} autoComplete='name' id="name" />
+          <InputField
+                type="password"
+                placeholder="Enter your Password"
+                className="input input-bordered w-full"
+                required={true}
+                autoComplete="password"
+                id="password"
+                register={register}
+              />
         </div>
         <Button
           type = 'button'

@@ -1,6 +1,5 @@
 'use client'
 import Head from 'next/head'
-import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Footer from "@/components/Footer";

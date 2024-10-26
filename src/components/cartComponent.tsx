@@ -1,6 +1,4 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart, updateQuantity } from "../store/slices/cartSlice";
 
 interface CartItem {
   id: number;

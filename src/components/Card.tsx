@@ -4,7 +4,7 @@ import Button from "./Buttons";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {clearState} from '../store/slices/productsSlice'
-import { useDispatch, UseDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 type CardProps = {
   id: string;

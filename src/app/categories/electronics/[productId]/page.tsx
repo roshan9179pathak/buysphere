@@ -1,8 +1,7 @@
 "use client";
-import React, { useState, useLayoutEffect, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "next/navigation";
-import getProduct from "../../../../store/slices/productsSlice";
 import Button from "@/components/Buttons";
 
 interface Product {

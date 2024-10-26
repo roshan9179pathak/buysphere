@@ -3,7 +3,6 @@ import React from "react";
 import Link from "next/link";
 import InputField from "./InputField";
 import Button from "./Buttons";
-import AlertComp from "./alert";
 import { useForm } from "react-hook-form";
 
 interface FormData {
@@ -12,7 +11,7 @@ interface FormData {
 }
 
 const Auth = () => {
-  const { register, getValues, handleSubmit } = useForm<FormData>();
+  const { register, getValues } = useForm<FormData>();
 
   const handleLogin = () => {
     const newUser = getValues();
@@ -46,7 +45,7 @@ const Auth = () => {
                 required={true}
                 autoComplete="email"
                 id="email"
-                {...register("email")}
+                register={register}
               />
             </div>
             <div className="form-control mb-4">

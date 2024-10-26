@@ -2,11 +2,9 @@
 import React from "react";
 import Link from "next/link";
 import { VscAccount } from "react-icons/vsc";
-import { clearState } from "../store/slices/productsSlice";
 import { useDispatch } from "react-redux";
 import { FaShoppingCart } from "react-icons/fa";
 const Header = () => {
-  const dispatch = useDispatch();
 
   return (
     <header>
