@@ -52,6 +52,8 @@ To get a local copy of the project up and running, follow these steps:
     ```
     Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+    Deployed Link [https://buysphere.vercel.app/]
+
 ## License
 
 This project is licensed under the ... License.
