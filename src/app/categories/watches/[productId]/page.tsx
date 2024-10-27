@@ -26,12 +26,19 @@ const Page = () => {
   const dispatch = useDispatch();
 
   const cartHandler = ()=>{
+    if(quantity <= 0){
+      alert(`Please add products`)
+  }
+  else {
     dispatch(addToCart({
       id:Number(params.productId),
       quantity:quantity,
-      image: selectedProduct?.image ?? 'default image',
+      image: selectedProduct?.image ?? 'image not found',
       price: selectedProduct?.price ?? 0
-    }))
+    }));
+    alert(`Product added successfully`);
+    setQuantity(0)
+  }
   }
 
   const decreaseQuantity = () => {
