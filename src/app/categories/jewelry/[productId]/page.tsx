@@ -56,7 +56,7 @@ const Page = () => {
     let categoryProduct = [];
     if (storedProducts) {
       categoryProduct = JSON.parse(storedProducts);
-      let filteredProducts = categoryProduct.filter(
+      const filteredProducts = categoryProduct.filter(
         (product: any) => product.category === "jewelery"
       );
 
