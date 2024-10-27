@@ -23,6 +23,7 @@ const Page: React.FC = () => {
 
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
     const storedProducts = localStorage.getItem("products");
     let categoryProduct = [];
     if (storedProducts) {
@@ -37,6 +38,7 @@ const Page: React.FC = () => {
     } else {
       setLoading(true);
     }
+  }
   }, []);
 
   if (loading) {

@@ -45,6 +45,7 @@ const Page = () => {
 
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
     const storedProducts = localStorage.getItem("products");
     let categoryProduct = [];
     if (storedProducts) {
@@ -65,6 +66,7 @@ const Page = () => {
     } else {
       setLoading(true);
     }
+  }
   }, []);
 
 
