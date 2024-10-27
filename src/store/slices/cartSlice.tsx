@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 interface CartItem {
   id: number;
   title?: string;
@@ -32,6 +33,11 @@ const cartSlice = createSlice({
 
       localStorage.setItem('cart', JSON.stringify(state.items))
     },
+
+    setCartItems: (state, action: PayloadAction<CartItem[]>) => {
+      state.items = action.payload;
+    },
+
     removeFromCart(state, action: PayloadAction<number>) {
       state.items = state.items.filter((item) => item.id !== action.payload);
     },
@@ -49,5 +55,19 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, updateQuantity } = cartSlice.actions;
+export const { addToCart, removeFromCart, updateQuantity , setCartItems } = cartSlice.actions;
 export default cartSlice.reducer;
+
+
+export function useLoadCartItems() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const cartItems = localStorage.getItem("cart");
+      if (cartItems) {
+        dispatch(setCartItems(JSON.parse(cartItems)));
+      }
+    }
+  }, [dispatch]);
+}
