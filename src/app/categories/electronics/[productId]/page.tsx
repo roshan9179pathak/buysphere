@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useSelector , useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams } from "next/navigation";
 import {addToCart} from '../../../../store/slices/cartSlice'
 import Button from "@/components/Buttons";
@@ -21,7 +21,6 @@ interface Product {
 const Page = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(1);
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const dispatch = useDispatch();
   const params = useParams();
@@ -30,8 +29,8 @@ const Page = () => {
       dispatch(addToCart({
         id:Number(params.productId),
         quantity:quantity,
-        image: selectedProduct?.image,
-        price: selectedProduct?.price
+        image: selectedProduct?.image ?? 'image not found',
+        price: selectedProduct?.price ?? 0
       }))
     }
 
@@ -50,7 +49,7 @@ const Page = () => {
     let categoryProduct = [];
     if (storedProducts) {
       categoryProduct = JSON.parse(storedProducts);
-      let filteredProducts = categoryProduct.filter(
+      const filteredProducts = categoryProduct.filter(
         (product: any) => product.category === "electronics"
       );
 
@@ -75,9 +74,7 @@ const Page = () => {
   </div>
   }
 
-  if(error){
-    return <p>{`Error Occured`}</p>
-  }
+
 
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl">

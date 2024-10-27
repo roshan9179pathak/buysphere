@@ -3,8 +3,6 @@ import React from "react";
 import Button from "./Buttons";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import {clearState} from '../store/slices/productsSlice'
-import { useDispatch } from "react-redux";
 
 type CardProps = {
   id: string;
@@ -15,9 +13,7 @@ type CardProps = {
 
 const Card = ({ id, src, name, description }: CardProps) => {
 
-  // const dispatch = useDispatch();
   const router = useRouter();
-
   const clearGstate = ()=>{
     
   }

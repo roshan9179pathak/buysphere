@@ -2,7 +2,6 @@
 import React from "react";
 import Link from "next/link";
 import { VscAccount } from "react-icons/vsc";
-import { FaShoppingCart } from "react-icons/fa";
 import CartIcon from "./CartIcon";
 const Header = () => {
 

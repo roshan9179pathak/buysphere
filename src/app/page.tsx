@@ -68,6 +68,7 @@ export default function Home() {
 
         data.forEach((product) => dispatch(addProduct(product)));
       } catch (error: unknown) {
+        console.log(products);
         if (error instanceof Error) {
           setError(error.message);
         } else {

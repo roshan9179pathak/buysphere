@@ -1,9 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
-import { RootState } from "@/store/store";
 
 interface Product {
   id: number;
@@ -22,40 +20,14 @@ const Page: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  //   const fetchProducts = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const response = await fetch(
-  //         "https://fakestoreapi.com/products/category/jewelery"
-  //       );
-  //       if (!response.ok) {
-  //         throw new Error("Failed to fetch products");
-  //       }
-
-  //       const data: Product[] = await response.json();
-  //       setProducts(data);
-
-  //       data.map((product) => dispatch(addProduct(product)));
-  //     } catch (error: unknown) {
-  //       if (error instanceof Error) {
-  //         setError(error.message);
-  //       } else {
-  //         setError("Failed to fetch products");
-  //       }
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchProducts();
-  // }, [dispatch]);
+  
 
   useEffect(() => {
     const storedProducts = localStorage.getItem("products");
     let categoryProduct = [];
     if (storedProducts) {
       categoryProduct = JSON.parse(storedProducts);
-      let filteredProducts = categoryProduct.filter(
+      const filteredProducts = categoryProduct.filter(
         (product: any) => product.category === "jewelery"
       );
 

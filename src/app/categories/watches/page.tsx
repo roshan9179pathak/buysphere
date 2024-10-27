@@ -1,9 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
-import { addProduct } from "../../../store/slices/productsSlice";
 
 interface Product {
   id: number;
@@ -30,7 +28,7 @@ const Page: React.FC = () => {
     let categoryProduct = [];
     if (storedProducts) {
       categoryProduct = JSON.parse(storedProducts);
-      let filteredProducts = categoryProduct.filter(
+      const filteredProducts = categoryProduct.filter(
         (product: any) => product.category === "jewelery"
       );
 
