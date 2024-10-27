@@ -31,8 +31,8 @@ const Page = () => {
     dispatch(addToCart({
       id:Number(params.productId),
       quantity:quantity,
-      image: selectedProduct?.image,
-      price: selectedProduct?.price
+      image: selectedProduct?.image ?? 'defaul image',
+      price: selectedProduct?.price ?? 0
     }))
   }
 
