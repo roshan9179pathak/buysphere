@@ -20,6 +20,7 @@ const SignUp = () => {
 
   const handleSignUp = ()=>{
     const newUser = getValues();
+    if (typeof window !== 'undefined') {
       if(localStorage.getItem('users')){
         const currentUsers = JSON.parse(localStorage.getItem('users') || '[]');
         console.log(currentUsers);
@@ -29,7 +30,7 @@ const SignUp = () => {
       }else {
         localStorage.setItem('users', JSON.stringify([newUser]))
       }
-
+    }
         router.push('/')
       
   }
