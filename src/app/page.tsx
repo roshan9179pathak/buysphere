@@ -33,7 +33,7 @@ export default function Home() {
     const fetchProducts = async () => {
       setLoading(true);
       try {
- 
+        if(typeof window !== undefined){
         const storedProducts = localStorage.getItem("products");
         const cacheTimestamp = localStorage.getItem("cacheTimestamp");
         
@@ -70,6 +70,7 @@ export default function Home() {
         }
 
         data.forEach((product) => dispatch(addProduct(product)));
+      }
       } catch (error: unknown) {
         console.log(products);
         if (error instanceof Error) {
