@@ -10,16 +10,16 @@ type CardProps = {
   id: string;
   src: any;
   name: string,
-  description: string
+  description: string,
 };
 
 const Card = ({ id, src, name, description }: CardProps) => {
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const router = useRouter();
 
   const clearGstate = ()=>{
-    dispatch(clearState());
+    
   }
 
   const handleClick = () => {
@@ -34,7 +34,7 @@ const Card = ({ id, src, name, description }: CardProps) => {
 
         <Image
           src={src} 
-          alt={id}
+          alt={String(id)}
           width={300} 
           height={200} 
           className="rounded-xl"

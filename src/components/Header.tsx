@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { VscAccount } from "react-icons/vsc";
 import { FaShoppingCart } from "react-icons/fa";
+import CartIcon from "./CartIcon";
 const Header = () => {
 
   return (
@@ -17,7 +18,7 @@ const Header = () => {
           </Link>
 
           <Link href="/cart">
-            <FaShoppingCart />
+           <CartIcon />
           </Link>
         </div>
       </nav>

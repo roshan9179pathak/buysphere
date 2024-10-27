@@ -20,49 +20,37 @@ interface Product {
 
 const Page: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  
   const [loading, setLoading] = useState<boolean>(true);
 
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const storedProducts = localStorage.getItem("products");
+    let categoryProduct = [];
+    if (storedProducts) {
+      categoryProduct = JSON.parse(storedProducts);
+      let filteredProducts = categoryProduct.filter(
+        (product: any) => product.category === "electronics"
+      );
+
+      setProducts(filteredProducts);
+
+      setLoading(false);
+    } else {
       setLoading(true);
-      try {
-        const response = await fetch(
-          "https://fakestoreapi.com/products/category/electronics"
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch products");
-        }
-
-        const data: Product[] = await response.json();
-        setProducts(data);
-
-        data.map((product) => dispatch(addProduct(product)));
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError("Failed to fetch products");
-        }
-      } finally {
-        setLoading(false); 
-      }
-    };
-
-    fetchProducts();
-  }, [dispatch]);
+    }
+  }, []);
 
   if (loading) {
-    return <div className="flex justify-center items-center h-screen">
-    <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"></div>
-  </div>
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"></div>
+      </div>
+    );
   }
 
-  if (error) {
-    return <p>{error}</p>;
-  }
+  
+
 
   return (
     <main>

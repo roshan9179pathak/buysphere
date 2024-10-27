@@ -1,7 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector , useDispatch } from "react-redux";
 import { useParams } from "next/navigation";
+import {addToCart} from '../../../../store/slices/cartSlice'
 import Button from "@/components/Buttons";
 
 interface Product {
@@ -19,9 +20,20 @@ interface Product {
 
 const Page = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const dispatch = useDispatch();
+
+  const cartHandler = ()=>{
+    dispatch(addToCart({
+      id:Number(params.productId),
+      quantity:quantity,
+      image: selectedProduct?.image,
+      price: selectedProduct?.price
+    }))
+  }
 
   const decreaseQuantity = () => {
     setQuantity((prev) => (prev === 0 ? 0 : prev - 1));
@@ -36,51 +48,26 @@ const Page = () => {
   products = products.products;
 
   useEffect(() => {
-    const updateCall = async () => {
-      return new Promise(async (resolve) => {
-        const fetchProducts = async () => {
-          setLoading(true);
-          try {
-            const response = await fetch(
-              "https://fakestoreapi.com/products/category/jewelery"
-            );
-            if (!response.ok) {
-              throw new Error("Failed to fetch products");
-            }
-            const data: Product = await response.json();
-            products = data;
-          } catch (error: unknown) {
-            if (error instanceof Error) {
-              setError(error.message);
-            } else {
-              setError("Failed to fetch products");
-            }
-          } finally {
-            setLoading(false);
-          }
-          resolve(products);
-        };
-        await fetchProducts();
-      });
-    };
+    const storedProducts = localStorage.getItem("products");
+    let categoryProduct = [];
+    if (storedProducts) {
+      categoryProduct = JSON.parse(storedProducts);
+      let filteredProducts = categoryProduct.filter(
+        (product: any) => product.category === "jewelery"
+      );
 
-    const updateSelectedProduct = ()=>{
-      products.map((product: any) => {
-        if (product.id == params.productId) {
-          setSelectedProduct(product);
-        }
-      });
+      const foundProduct = filteredProducts.find(
+        (currentProduct: any) => currentProduct.id === Number(params.productId)
+      );
+
+      if (foundProduct) {
+        setSelectedProduct(foundProduct);
+      }
+
+      setLoading(false);
+    } else {
+      setLoading(true);
     }
-
-    if (products.length === 0) {
-      updateCall().then((resp) => {
-        products = resp;
-        updateSelectedProduct();
-      });
-    }
-
-    updateSelectedProduct();
-
   }, []);
 
   if(error){
@@ -119,7 +106,7 @@ const Page = () => {
               +
             </Button>
           </div>
-          <Button className="btn btn-primary" type="button">
+          <Button onClick={cartHandler} className="btn btn-primary" type="button">
             Add to Cart
           </Button>
         </div>

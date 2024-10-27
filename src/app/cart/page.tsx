@@ -1,10 +1,18 @@
+'use client'
 import React from 'react'
-
+import CartComponent from '../../components/CartComponent'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store/store'
 const page = () => {
+
+    const products = useSelector((state:RootState) => state.cart.items)
+    console.log(products);
+    
+
   return (
-    <div>
-      
-    </div>
+    <main>
+      <CartComponent items={products}  />
+    </main>
   )
 }
 
