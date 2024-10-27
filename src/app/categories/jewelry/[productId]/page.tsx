@@ -21,29 +21,28 @@ interface Product {
 const Page = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(1);
-  
+
   const [loading, setLoading] = useState<boolean>(true);
 
   const params = useParams();
   const dispatch = useDispatch();
 
-  const cartHandler = ()=>{
-    if(quantity <= 0){
-      alert(`Please add products`)
-  }
-  else {
-    dispatch(addToCart({
-      id:Number(params.productId),
-      quantity:quantity,
-      image: selectedProduct?.image ?? 'image not found',
-      price: selectedProduct?.price ?? 0
-    }));
-    alert(`Product added successfully`);
-    setQuantity(0)
-  }
-  }
-
-
+  const cartHandler = () => {
+    if (quantity <= 0) {
+      alert(`Please add products`);
+    } else {
+      dispatch(
+        addToCart({
+          id: Number(params.productId),
+          quantity: quantity,
+          image: selectedProduct?.image ?? "image not found",
+          price: selectedProduct?.price ?? 0,
+        })
+      );
+      alert(`Product added successfully`);
+      setQuantity(0);
+    }
+  };
 
   const decreaseQuantity = () => {
     setQuantity((prev) => (prev === 0 ? 0 : prev - 1));
@@ -53,32 +52,30 @@ const Page = () => {
     setQuantity((prev) => prev + 1);
   };
 
-
-  
-
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-    const storedProducts = localStorage.getItem("products");
-    let categoryProduct = [];
-    if (storedProducts) {
-      categoryProduct = JSON.parse(storedProducts);
-      const filteredProducts = categoryProduct.filter(
-        (product: any) => product.category === "jewelery"
-      );
+    if (typeof window !== "undefined") {
+      const storedProducts = localStorage.getItem("products");
+      let categoryProduct = [];
+      if (storedProducts) {
+        categoryProduct = JSON.parse(storedProducts);
+        const filteredProducts = categoryProduct.filter(
+          (product: any) => product.category === "jewelery"
+        );
 
-      const foundProduct = filteredProducts.find(
-        (currentProduct: any) => currentProduct.id === Number(params.productId)
-      );
+        const foundProduct = filteredProducts.find(
+          (currentProduct: any) =>
+            currentProduct.id === Number(params.productId)
+        );
 
-      if (foundProduct) {
-        setSelectedProduct(foundProduct);
+        if (foundProduct) {
+          setSelectedProduct(foundProduct);
+        }
+
+        setLoading(false);
+      } else {
+        setLoading(true);
       }
-
-      setLoading(false);
-    } else {
-      setLoading(true);
     }
-  }
   }, []);
 
   if (loading) {
@@ -89,11 +86,9 @@ const Page = () => {
     );
   }
 
-  
-
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl">
-      <figure className="w-4/5 max-h-96">
+      <figure className="w-4/5 max-h-96 flex justify-center mx-auto">
         <img
           src={selectedProduct?.image}
           alt="Album"
@@ -121,7 +116,11 @@ const Page = () => {
               +
             </Button>
           </div>
-          <Button onClick={cartHandler} className="btn btn-primary" type="button">
+          <Button
+            onClick={cartHandler}
+            className="btn btn-primary"
+            type="button"
+          >
             Add to Cart
           </Button>
         </div>

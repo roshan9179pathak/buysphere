@@ -18,27 +18,26 @@ interface Product {
 
 const Page: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  
+
   const [loading, setLoading] = useState<boolean>(true);
 
-
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-    const storedProducts = localStorage.getItem("products");
-    let categoryProduct = [];
-    if (storedProducts) {
-      categoryProduct = JSON.parse(storedProducts);
-      const filteredProducts = categoryProduct.filter(
-        (product: any) => product.category === "electronics"
-      );
+    if (typeof window !== "undefined") {
+      const storedProducts = localStorage.getItem("products");
+      let categoryProduct = [];
+      if (storedProducts) {
+        categoryProduct = JSON.parse(storedProducts);
+        const filteredProducts = categoryProduct.filter(
+          (product: any) => product.category === "electronics"
+        );
 
-      setProducts(filteredProducts);
+        setProducts(filteredProducts);
 
-      setLoading(false);
-    } else {
-      setLoading(true);
+        setLoading(false);
+      } else {
+        setLoading(true);
+      }
     }
-  }
   }, []);
 
   if (loading) {
@@ -49,14 +48,11 @@ const Page: React.FC = () => {
     );
   }
 
-  
-
-
   return (
     <main>
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 justify-items-center">
         {products.map((product) => (
-          <li key={product.id} className="w-full">
+          <li key={product.id}>
             <Link href={`/categories/electronics/${product.id}`}>
               <ProductCard onClick={() => console.log()} product={product} />
             </Link>
