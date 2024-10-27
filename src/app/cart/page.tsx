@@ -3,7 +3,7 @@ import React from 'react'
 import CartComponent from '../../components/CartComponent'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
-const page = () => {
+const Page = () => {
 
     const products = useSelector((state:RootState) => state.cart.items)
     console.log(products);
@@ -16,4 +16,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
