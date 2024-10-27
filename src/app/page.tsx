@@ -33,9 +33,10 @@ export default function Home() {
     const fetchProducts = async () => {
       setLoading(true);
       try {
+ 
         const storedProducts = localStorage.getItem("products");
         const cacheTimestamp = localStorage.getItem("cacheTimestamp");
-
+        
         if (storedProducts && cacheTimestamp) {
           const timeElapsed = Date.now() - parseInt(cacheTimestamp, 10);
           if (timeElapsed < CACHE_EXPIRATION_TIME) {
@@ -63,8 +64,10 @@ export default function Home() {
 
         setProducts(data);
 
-        localStorage.setItem("products", JSON.stringify(data));
-        localStorage.setItem("cacheTimestamp", Date.now().toString());
+        if (typeof window !== 'undefined') {
+          localStorage.setItem("products", JSON.stringify(data));
+          localStorage.setItem("cacheTimestamp", Date.now().toString());
+        }
 
         data.forEach((product) => dispatch(addProduct(product)));
       } catch (error: unknown) {
