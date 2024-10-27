@@ -21,7 +21,6 @@ interface Product {
 const Page = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(1);
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   const dispatch = useDispatch();
@@ -70,9 +69,7 @@ const Page = () => {
     }
   }, []);
 
-  if(error){
-    return <p>{`Error occured`}</p>
-  }
+
 
   if (loading) {
     return <div className="flex justify-center items-center h-screen">

@@ -21,7 +21,7 @@ interface Product {
 const Page = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(1);
-  const [error, setError] = useState<string | null>(null);
+  
   const [loading, setLoading] = useState<boolean>(true);
 
   const params = useParams();
@@ -36,7 +36,7 @@ const Page = () => {
     }))
   }
 
-  // let cartItems = useSelector((state: any) => state.cart);
+
 
   const decreaseQuantity = () => {
     setQuantity((prev) => (prev === 0 ? 0 : prev - 1));
@@ -49,54 +49,7 @@ const Page = () => {
   let products = useSelector((state: any) => state.products);
   products = products.products;
 
-  //   const updateCall = async () => {
-  //     return new Promise(async (resolve) => {
-  //       const fetchProducts = async () => {
-  //         setLoading(true);
-  //         try {
-  //           const response = await fetch(
-  //             "https://fakestoreapi.com/products/category/jewelery"
-  //           );
-  //           if (!response.ok) {
-  //             throw new Error("Failed to fetch products");
-  //           }
-  //           const data: Product = await response.json();
-  //           products = data;
-  //         } catch (error: unknown) {
-  //           if (error instanceof Error) {
-  //             setError(error.message);
-  //           } else {
-  //             setError("Failed to fetch products");
-  //           }
-  //         } finally {
-  //           setLoading(false);
-  //         }
-  //         resolve(products);
-  //       };
-  //       await fetchProducts();
-  //     });
-  //   };
-
-  //   const updateSelectedProduct = ()=>{
-  //     products.map((product: any) => {
-  //       if (product.id == params.productId) {
-  //         setSelectedProduct(product);
-  //       }
-  //     });
-  //   }
-
-  //   if (products.length === 0) {
-  //     updateCall().then((resp) => {
-  //       products = resp;
-  //       updateSelectedProduct();
-  //     });
-  //   }
-
-  //   updateSelectedProduct();
-
-  //   setLoading(false)
-
-  // }, []);
+  
 
   useEffect(() => {
     const storedProducts = localStorage.getItem("products");
@@ -129,9 +82,7 @@ const Page = () => {
     );
   }
 
-  if (error) {
-    return <p>{error}</p>;
-  }
+  
 
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl">
