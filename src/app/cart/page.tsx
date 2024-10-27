@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import CartComponent from '../../components/CartComponent'
+// import CartComponent from '../../components/CartComponent'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
 const Page = () => {
@@ -11,7 +11,7 @@ const Page = () => {
 
   return (
     <main>
-      <CartComponent items={products}  />
+      {/* <CartComponent items={products}  /> */}
     </main>
   )
 }
