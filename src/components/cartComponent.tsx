@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Button from "./Buttons";
-import { removeFromCart } from "../store/slices/cartSlice";
-import { useDispatch } from "react-redux";
 interface CartItems {
   id: number;
   title?: string;
@@ -17,7 +15,6 @@ interface CartComponentProps {
 const CartComponent: React.FC<CartComponentProps> = ({ items }) => {
   console.log(items);
   
-  const dispatch = useDispatch();
 
   const totalQuantity = items.reduce((total, item) => total + item.quantity, 0);
   const totalPrice = items.reduce(
