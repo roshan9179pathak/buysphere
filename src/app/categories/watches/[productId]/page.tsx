@@ -43,8 +43,6 @@ const Page = () => {
   };
 
   const params = useParams();
-  let products = useSelector((state: any) => state.products);
-  products = products.products;
 
   useEffect(() => {
     const storedProducts = localStorage.getItem("products");

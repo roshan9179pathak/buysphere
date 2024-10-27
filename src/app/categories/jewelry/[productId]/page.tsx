@@ -46,8 +46,6 @@ const Page = () => {
     setQuantity((prev) => prev + 1);
   };
 
-  let products = useSelector((state: any) => state.products);
-  products = products.products;
 
   
 
