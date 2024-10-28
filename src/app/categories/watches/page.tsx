@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
+import { setTimeout } from "timers/promises";
 
 interface Product {
   id: number;
@@ -38,6 +39,15 @@ const Page: React.FC = () => {
     } else {
       setLoading(true);
     }
+  }, []);
+
+  useEffect(() => {
+    const timeoutID = window.setTimeout(() => {
+      alert(`There were some API issues, that's why jewelry is being displayed in the watch category`);
+    }, 2000);
+  
+    
+    return () => window.clearTimeout(timeoutID);
   }, []);
 
   if (loading) {

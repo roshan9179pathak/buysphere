@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import InputField from "./InputField";
 import Button from "./Buttons";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 interface FormData {
@@ -12,13 +13,23 @@ interface FormData {
 
 const Auth = () => {
   const { register, getValues } = useForm<FormData>();
+  const router = useRouter();
 
   const handleLogin = () => {
     const newUser = getValues();
     if (typeof window !== 'undefined') {
       if(localStorage.getItem('users')){
         const currentUsers = JSON.parse(localStorage.getItem('users') || '[]');
-        console.log(currentUsers);
+        currentUsers.map((user:FormData)=>{
+          if(user.email === newUser.email && user.password === newUser.password){
+            alert(`Sign In successful`)
+            router.push('/')
+          }else{
+            alert(`Invalid Credentials`)
+          }
+        })
+
+
         const updateUsers = [...currentUsers , newUser]
         console.log(updateUsers);
         localStorage.setItem('users', JSON.stringify(updateUsers))

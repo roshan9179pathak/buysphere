@@ -20,83 +20,81 @@ interface Product {
   };
 }
 
+
+
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-
+  const [authenticated, setAuthenticated] = useState<boolean>(false);
   const dispatch = useDispatch();
   const storedProducts = useSelector((state: any) => state.products);
 
   useEffect(() => {
-    const CACHE_EXPIRATION_TIME = 60 * 60 * 1000;
+    const CACHE_EXPIRATION_TIME = 60 * 60 * 1000; // 1 hour
     const fetchProducts = async () => {
-      setLoading(true);
       try {
-        if(typeof window !== undefined){
-        const storedProducts = localStorage.getItem("products");
-        const cacheTimestamp = localStorage.getItem("cacheTimestamp");
-        
-        if (storedProducts && cacheTimestamp) {
-          const timeElapsed = Date.now() - parseInt(cacheTimestamp, 10);
-          if (timeElapsed < CACHE_EXPIRATION_TIME) {
-            const productsFromStorage: Product[] = JSON.parse(storedProducts);
-            console.log(
-              `Using cached products, count: ${productsFromStorage.length}`
-            );
+        if (typeof window !== "undefined") {
+          const storedProducts = localStorage.getItem("products");
+          const cacheTimestamp = localStorage.getItem("cacheTimestamp");
 
-            setProducts(productsFromStorage);
-            productsFromStorage.forEach((product) =>
-              dispatch(addProduct(product))
-            );
-            setLoading(false);
-            return;
+          if (storedProducts && cacheTimestamp) {
+            const timeElapsed = Date.now() - parseInt(cacheTimestamp, 10);
+            if (timeElapsed < CACHE_EXPIRATION_TIME) {
+              const productsFromStorage: Product[] = JSON.parse(storedProducts);
+              setProducts(productsFromStorage);
+              productsFromStorage.forEach((product) =>
+                dispatch(addProduct(product))
+              );
+              return;
+            }
           }
-        }
 
-        const response = await fetch("https://fakestoreapi.com/products");
-        if (!response.ok) {
-          throw new Error("Failed to fetch products");
-        }
+          const response = await fetch("https://fakestoreapi.com/products");
+          if (!response.ok) {
+            console.log(products);
+            throw new Error("Failed to fetch products");
+          }
 
-        const data: Product[] = await response.json();
-        console.log(`Fetched products, count: ${data.length}`);
-
-        setProducts(data);
-
-        if (typeof window !== 'undefined') {
+          const data: Product[] = await response.json();
+          setProducts(data);
           localStorage.setItem("products", JSON.stringify(data));
           localStorage.setItem("cacheTimestamp", Date.now().toString());
+          data.forEach((product) => dispatch(addProduct(product)));
         }
-
-        data.forEach((product) => dispatch(addProduct(product)));
-      }
       } catch (error: unknown) {
-        console.log(products);
         if (error instanceof Error) {
           setError(error.message);
         } else {
           setError("Failed to fetch products");
         }
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchProducts();
   }, [dispatch, storedProducts.length]);
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"></div>
-      </div>
-    );
-  }
-  
+  useEffect(() => {
+
+    if (typeof window !== "undefined") {
+      const isUserAuthenticated = localStorage.getItem("users")!==null ? true : false;
+      console.log(isUserAuthenticated);
+      
+      if(isUserAuthenticated !== null  && isUserAuthenticated === true)
+      setAuthenticated(isUserAuthenticated);
+    }
+  }, []);
+
   if (error) return <p>Error: {error}</p>;
 
-  return (
+  if (!authenticated ) 
+    return (
+      <p className="text-center text-[#1d232a]">
+        Please Sign-In to explore products
+      </p>
+    );
+  
+
+  return  (
     <main className="flex justify-center items-center flex-wrap gap-10 min-h-screen">
       <Card
         id="jewelry"
@@ -117,5 +115,7 @@ export default function Home() {
         description="Timeless Style Awaits – Discover Our Stunning Collection of Watches to Elevate Your Look!"
       />
     </main>
-  );
+    
+  )
+  
 }
