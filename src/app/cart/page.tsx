@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import CartComponent from "@/components/CartComponent";
+import CartComponent from "@/components/cartComponent";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
 import { useLoadCartItems } from "@/store/slices/cartSlice";
