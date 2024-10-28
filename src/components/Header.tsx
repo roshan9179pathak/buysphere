@@ -1,12 +1,12 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { VscAccount } from "react-icons/vsc";
 import CartIcon from "./CartIcon";
-import { useLoadCartItems } from "@/store/slices/cartSlice";
+// import { useLoadCartItems } from "@/store/slices/cartSlice";
 const Header = () => {
 
-  useLoadCartItems();
+
 
   return (
     <header>

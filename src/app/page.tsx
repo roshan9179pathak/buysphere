@@ -86,12 +86,12 @@ export default function Home() {
 
   if (error) return <p>Error: {error}</p>;
 
-  if (!authenticated ) 
-    return (
-      <p className="text-center text-[#1d232a]">
-        Please Sign-In to explore products
-      </p>
-    );
+  // if (!authenticated ) 
+  //   return (
+  //     <p className="text-center text-[#1d232a]">
+  //       Please Sign-In to explore products
+  //     </p>
+  //   );
   
 
   return  (

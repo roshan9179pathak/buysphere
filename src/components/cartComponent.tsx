@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "./Buttons";
-import { FaTrash } from 'react-icons/fa';
+import { FaTrash } from "react-icons/fa";
 import { removeFromCart } from "@/store/slices/cartSlice";
 import { useDispatch } from "react-redux";
 interface CartItems {
@@ -16,9 +16,7 @@ interface CartComponentProps {
 }
 
 const CartComponent: React.FC<CartComponentProps> = ({ items }) => {
-
-  const dispatch = useDispatch()
-  
+  const dispatch = useDispatch();
 
   const totalQuantity = items.reduce((total, item) => total + item.quantity, 0);
   const totalPrice = items.reduce(
@@ -26,9 +24,9 @@ const CartComponent: React.FC<CartComponentProps> = ({ items }) => {
     0
   );
 
-  const handleDelete = (id:number)=>{
-    dispatch(removeFromCart(id))
-  }
+  const handleDelete = (id: number) => {
+    dispatch(removeFromCart(id));
+  };
 
   return (
     <div className="p-4 border rounded-md shadow-md">
@@ -53,7 +51,12 @@ const CartComponent: React.FC<CartComponentProps> = ({ items }) => {
                 <span className="text-sm">Price: ${item.price.toFixed(2)}</span>
               </div>
             </div>
-            <div><FaTrash onClick={()=> handleDelete(item.id)} style={{ color: 'red', fontSize: '15px' }} /></div>
+            <div>
+              <FaTrash
+                onClick={() => handleDelete(item.id)}
+                style={{ color: "red", fontSize: "15px" }}
+              />
+            </div>
           </li>
         ))}
       </ul>
